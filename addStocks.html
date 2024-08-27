@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Ticker Cookie</title>
+    <script>
+        // Function to create a cookie
+        function setCookie(name, value, days) {
+            const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+            document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+        }
+
+        // Function to handle form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const tickerInput = document.getElementById('ticker').value;
+            if (tickerInput) {
+                setCookie('stockTicker', tickerInput, 30); // Set cookie for 30 days
+                alert('Stock ticker stored as a cookie!');
+            } else {
+                alert('Please enter a stock ticker.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Store Stock Ticker</h1>
+    <form onsubmit="handleSubmit(event)">
+        <label for="ticker">Enter Stock Ticker:</label>
+        <input type="text" id="ticker" name="ticker" required>
+        <button type="submit">Save Ticker</button>
+    </form>
+</body>
+</html>
